@@ -18,8 +18,8 @@ import os
 import re
 
 
-INFO_PATH = os.getcwd() + '\info'
-MAIN_DATA_PATH = os.getcwd() + '\main_data.txt'
+INFO_PATH = os.getcwd() + '\\task1\info'
+MAIN_DATA_PATH = os.getcwd() + '\\task1\main_data.txt'
 
 
 def get_data(clues_path, path):
@@ -69,30 +69,20 @@ def get_data(clues_path, path):
 def write_to_csv(name):
     main_data, length = get_data(MAIN_DATA_PATH, INFO_PATH)
     d_data = {}
-    counter = 0
+
+    with open(name, 'w+') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=main_data)
+        writer.writeheader()
 
     for i in range(length):
         with open(os.getcwd() + f'\{i+1}.txt') as file:
-            data = str(file.readlines()).split(sep=',')
-            d_data = dict.fromkeys(main_data[i], data[counter])
-            print(d_data)
-            counter += 1
-    # for i, item in enumerate(main_data):
-    #
-    #     for j in range(length):
-    #         d_data = dict.fromkeys(main_data_multiplied, lists[i][j])
-    #         print(d_data)
-    #         dict_data.update(d_data)
-    #         print(dict_data)
-    #     data.update(dict_data)
-    #     print(data)
-    # d.update(data)
-    # print(d)
-    #
-    # with open(name, 'w+') as csv_file:
-    #     writer = csv.DictWriter(csv_file, fieldnames=main_data)
-    #     writer.writeheader()
-    #     writer.writerows(file.readlines())
+            data = file.readline().split(sep=',')
+            d_data = dict.fromkeys(main_data)
+            for j, jitem in enumerate(data):
+                d_data[main_data[j]] = jitem
+        with open(name, 'a+') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=main_data)
+            writer.writerow(d_data)
 
 
 write_to_csv('test.csv')
