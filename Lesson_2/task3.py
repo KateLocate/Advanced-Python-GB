@@ -10,4 +10,17 @@
 
 import yaml
 
+data_to_yaml = {
+    'list': ['-', '+', '='],
+    'integer': 20,
+    'dictionary': {
+        'т-30': [10, 'двадцать'],
+        'а5': 'опять'
+    }
+}
 
+with open('task3\\test.yaml', 'w+') as yaml_file:
+    yaml.dump(data_to_yaml, yaml_file, allow_unicode=True, default_flow_style=False)
+
+with open('task3\\test.yaml') as yaml_file:
+    print(yaml_file.read())

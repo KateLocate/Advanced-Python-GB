@@ -9,3 +9,19 @@
 import json
 
 
+def write_order_to_json(item, quantity, price, buyer, date):
+
+    dict_to_json = {
+        'item': item,
+        'quantity': quantity,
+        'price': price,
+        'buyer': buyer,
+        'date': date
+    }
+
+    with open('task2\orders.json', 'w+') as f_n:
+        json.dump(dict_to_json, f_n, indent=4)
+        f_n.write('\n')
+
+
+write_order_to_json('scarf', '2', '1000', 'Ann', '23/12/2012')
