@@ -56,25 +56,43 @@ def get_data(clues_path, path):
             os_type_list.append(matches[3][1])
 
     os.chdir(os.getcwd() + '\..')
-    return main_data, os_prod_list, os_name_list, os_code_list, os_type_list
+    for i in range(len(files)):
+        with open(os.getcwd() + f"\{i+1}.txt", 'w') as file:
+            file.write(f'{os_prod_list[i]},')
+            file.write(f'{os_name_list[i]},')
+            file.write(f'{os_code_list[i]},')
+            file.write(os_type_list[i])
+
+    return main_data, len(os_code_list)
 
 
 def write_to_csv(name):
-    # main_data, os_prod_list, os_name_list, os_code_list, os_type_list = get_data(MAIN_DATA_PATH, INFO_PATH)
-    #
-    # lists = [os_prod_list, os_name_list, os_code_list, os_type_list]
-    # data = []
-    # counter = 0
+    main_data, length = get_data(MAIN_DATA_PATH, INFO_PATH)
+    d_data = {}
+    counter = 0
+
+    for i in range(length):
+        with open(os.getcwd() + f'\{i+1}.txt') as file:
+            data = str(file.readlines()).split(sep=',')
+            d_data = dict.fromkeys(main_data[i], data[counter])
+            print(d_data)
+            counter += 1
     # for i, item in enumerate(main_data):
     #
-    #     dict_data = dict.fromkeys(main_data, lists[counter])
-    #     print(dict_data)
-    #     counter += 1
-
+    #     for j in range(length):
+    #         d_data = dict.fromkeys(main_data_multiplied, lists[i][j])
+    #         print(d_data)
+    #         dict_data.update(d_data)
+    #         print(dict_data)
+    #     data.update(dict_data)
+    #     print(data)
+    # d.update(data)
+    # print(d)
+    #
     # with open(name, 'w+') as csv_file:
-        # writer = csv.DictWriter(csv_file, fieldnames=main_data)
-        # writer.writeheader()
-        # writer.writerows()
+    #     writer = csv.DictWriter(csv_file, fieldnames=main_data)
+    #     writer.writeheader()
+    #     writer.writerows(file.readlines())
 
 
 write_to_csv('test.csv')
