@@ -1,0 +1,1 @@
+2019-03-21 16:03:30,354 - DEBUG - __main__- Response received: {"action": "lower_text", "user": null, "time": 1553173410.352644, "data": "Action is not supported.", "code": 404}
